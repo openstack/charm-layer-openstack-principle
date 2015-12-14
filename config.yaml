@@ -3,13 +3,22 @@ options:
     default: distro
     type: string
     description: |
-      Repository from which to install.  May be one of the following:
-      distro (default), ppa:somecustom/ppa, a deb url sources entry,
-      or a supported Cloud Archive release pocket.
+      Repository from which to install OpenStack.
 
-      Supported Cloud Archive sources include: cloud:precise-folsom,
-      cloud:precise-folsom/updates, cloud:precise-folsom/staging,
-      cloud:precise-folsom/proposed.
+      May be one of the following:
+
+        distro (default)
+        ppa:somecustom/ppa (PPA name must include OpenStack Release)
+        deb url sources entry|key id
+        or a supported Ubuntu Cloud Archive pocket.
+
+      Supported Ubuntu Cloud Archive pockets include:
+
+        cloud:trusty-liberty
+        cloud:trusty-juno
+        cloud:trusty-kilo
+        cloud:trusty-liberty
+        cloud:trusty-mitaka
 
       Note that updating this setting to a source that is known to
       provide a later version of OpenStack will trigger a software
