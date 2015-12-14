@@ -14,17 +14,3 @@ options:
       Note that updating this setting to a source that is known to
       provide a later version of OpenStack will trigger a software
       upgrade.
-  debug:
-    default: False
-    type: boolean
-    description: Enable debug logging
-  verbose:
-    default: False
-    type: boolean
-    description: Enable verbose logging
-  use-syslog:
-    type: boolean
-    default: False
-    description: |
-      Setting this to True will allow supporting services to log to syslog.
-
