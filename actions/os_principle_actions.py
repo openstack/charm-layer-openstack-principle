@@ -26,6 +26,7 @@ import charmhelpers.core.hookenv as hookenv
 import charms_openstack.bus
 import charms_openstack.charm
 
+hookenv._run_atstart()
 charms_openstack.bus.discover()
 
 
