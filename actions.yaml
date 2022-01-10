@@ -2,3 +2,6 @@ openstack-upgrade:
   description: |
     Perform openstack upgrades. Config option action-managed-upgrade must be
     set to True.
+package-upgrade:
+  description: |
+    Perform package upgrades for the current OpenStack release.
