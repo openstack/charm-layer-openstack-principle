@@ -31,9 +31,22 @@ charms_openstack.bus.discover()
 
 
 def openstack_upgrade_action(*args):
-    """Run the resume action."""
+    """Run the openstack-upgrade action."""
     with charms_openstack.charm.provide_charm_instance() as charm_instance:
-        charm_instance.run_upgrade()
+        charm_instance.run_upgrade(upgrade_openstack=True)
+        charm_instance._assess_status()
+
+
+def package_upgrade_action(*args):
+    """Run the package-upgrade action."""
+    with charms_openstack.charm.provide_charm_instance() as charm_instance:
+        if charm_instance.openstack_upgrade_available(
+                charm_instance.release_pkg):
+            hookenv.action_set({'outcome':
+                                'upgrade skipped because an openstack upgrade '
+                                'is available'})
+            return
+        charm_instance.run_upgrade(upgrade_openstack=False)
         charm_instance._assess_status()
 
 
@@ -41,6 +54,7 @@ def openstack_upgrade_action(*args):
 # can map to a python function.
 ACTIONS = {
     "openstack-upgrade": openstack_upgrade_action,
+    "package-upgrade": package_upgrade_action,
 }
 
 

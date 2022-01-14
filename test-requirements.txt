@@ -3,9 +3,9 @@
 # choices of *requirements.txt files for OpenStack Charms:
 #     https://github.com/openstack-charmers/release-tools
 #
+pyparsing<3.0.0  # aodhclient is pinned in zaza and needs pyparsing < 3.0.0, but cffi also needs it, so pin here.
+cffi==1.14.6; python_version < '3.6'  # cffi 1.15.0 drops support for py35.
 setuptools<50.0.0  # https://github.com/pypa/setuptools/commit/04e3df22df840c6bb244e9b27bc56750c44b7c85
-# Lint and unit test requirements
-flake8>=2.2.4
 
 stestr>=2.2.0
 
@@ -28,20 +28,22 @@ oslo.utils<=3.41.0;python_version<'3.6'
 requests>=2.18.4
 charms.reactive
 
-# Newer mock seems to have some syntax which is newer than python3.5 (e.g.
-# f'{something}'
-mock>=1.2,<4.0.0; python_version < '3.6'
-mock>=1.2; python_version >= '3.6'
-
 nose>=1.3.7
 coverage>=3.6
 git+https://github.com/openstack/charms.openstack.git#egg=charms.openstack
 #
 # Revisit for removal / mock improvement:
+#
+# NOTE(lourot): newer versions of cryptography require a Rust compiler to build,
+# see
+# * https://github.com/openstack-charmers/zaza/issues/421
+# * https://mail.python.org/pipermail/cryptography-dev/2021-January/001003.html
+#
 netifaces        # vault
 psycopg2-binary  # vault
 tenacity         # vault
-pbr              # vault
-cryptography     # vault, keystone-saml-mellon
+pbr==5.6.0       # vault
+cryptography<3.4 # vault, keystone-saml-mellon
 lxml             # keystone-saml-mellon
 hvac             # vault, barbican-vault
+psutil           # cinder-lvm
